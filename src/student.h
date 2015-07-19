@@ -24,6 +24,7 @@ typedef struct node {
 	char birthday[20]; //出生年月
 	char address[32]; //地址
 	char telephone[16]; //电话
+	char email[32]; //电子邮箱
 	struct node *next; //链表指针域
 } student_info;
 

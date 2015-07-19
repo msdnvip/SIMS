@@ -25,9 +25,9 @@ void display_student_info() {
 	pstu = student_list->next;
 	printf("所有学生信息如下所示:\n");
 	while (pstu) {
-		printf("学号:%d\t姓名:%s\t年龄:%d\t性别:%s\t地址:%s\t电话:%s\t\n", pstu->num,
-				pstu->name, pstu->age, pstu->sex, pstu->address,
-				pstu->telephone);
+		printf("学号:%d\t姓名:%s\t年龄:%d\t性别:%s\t地址:%s\t电话:%s\t电子邮件:%s\n",
+				pstu->num, pstu->name, pstu->age, pstu->sex, pstu->address,
+				pstu->telephone, pstu->email);
 		pstu = pstu->next;
 	}
 	if (!pstu) { //释放内存
@@ -60,6 +60,8 @@ int add_student_info() {
 	scanf("%s", pstu->address);
 	printf("请输入电话:");
 	scanf("%s", pstu->telephone);
+	printf("请输入电子邮件:");
+	scanf("%s", pstu->email);
 	//插入数据
 	pstu->next = student_list->next;
 	student_list->next = pstu;
@@ -106,6 +108,7 @@ int modify_student_info(int num) {
 	printf("4.修改出生年月.\n");
 	printf("5.修改地址.\n");
 	printf("6.修改电话.\n");
+	printf("7.修改电子邮件.\n");
 	printf("请选择要修改的信息:");
 	scanf("%d", &choice);
 	switch (choice) {
@@ -133,6 +136,10 @@ int modify_student_info(int num) {
 		printf("请输入新的地址:");
 		scanf("%s", pstu->telephone);
 		break;
+	case 7:
+		printf("请输入新的电子邮件:");
+		scanf("%s", pstu->email);
+		break;
 	default:
 		printf("输入错误，请重新选择操作!\n");
 	}
@@ -150,8 +157,8 @@ int read_file() {
 	fgetc(pfile);
 	while (!feof(pfile)) {
 		pstu = (student_info*) malloc(sizeof(student_info));
-		fscanf(pfile, "%d%s%d%s%s%s", &pstu->num, pstu->name, &pstu->age,
-				pstu->sex, pstu->address, pstu->telephone);
+		fscanf(pfile, "%d%s%d%s%s%s%s", &pstu->num, pstu->name, &pstu->age,
+				pstu->sex, pstu->address, pstu->telephone, pstu->email);
 		//插入记录
 		pstu->next = student_list->next;
 		student_list->next = pstu;
@@ -175,8 +182,9 @@ int save_file() {
 	}
 	pstu = student_list->next;
 	while (pstu) {
-		fprintf(pfile, " %d\t%s\t%d\t%s\t%s\t%s\t", pstu->num, pstu->name,
-				pstu->age, pstu->sex, pstu->address, pstu->telephone);
+		fprintf(pfile, " %d\t%s\t%d\t%s\t%s\t%s\t%s\t", pstu->num, pstu->name,
+				pstu->age, pstu->sex, pstu->address, pstu->telephone,
+				pstu->email);
 		pstu = pstu->next;
 	}
 	if (!pstu) { //释放内存

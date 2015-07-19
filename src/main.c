@@ -92,10 +92,27 @@ int main() {
 				}
 			}
 			break;
+		case 6:
+			break;
+		case 7:
+			printf("请输入要查找学生信息记录的学号:");
+			scanf("%d", &num);
+			student_info *pstu = search_student_info(num);
+			if (pstu == NULL) {
+				printf("不存在学号为%d的记录!\n", num);
+			} else {
+				printf("学号为%d的学生信息如下所示:\n", num);
+				printf("学号:%d\t姓名:%s\t年龄:%d\t性别:%s\t地址:%s\t电话:%s\t电子邮件:%s\n",
+						pstu->num, pstu->name, pstu->age, pstu->sex,
+						pstu->address, pstu->telephone, pstu->email);
+			}
+			break;
 		case 0:
 			printf("欢迎下次使用,再见!\n");
-			system("pause");
-			exit(0);
+			if (!student_list) {	//释放内存
+				free(student_list);
+			}
+			return 0;
 			break;
 		default:
 			printf("输入错误，请重新选择操作!\n");
@@ -113,5 +130,7 @@ void menu() {
 	printf("3.删除学生信息.\n");
 	printf("4.修改学生信息.\n");
 	printf("5.保存学生信息.\n");
+	printf("6.按照学号排序.\n");
+	printf("7.查找学生信息.\n");
 	printf("0.退出系统操作.\n");
 }
