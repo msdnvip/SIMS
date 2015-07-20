@@ -93,8 +93,6 @@ int main() {
 			}
 			break;
 		case 6:
-			break;
-		case 7:
 			printf("请输入要查找学生信息记录的学号:");
 			scanf("%d", &num);
 			student_info *pstu = search_student_info(num);
@@ -130,7 +128,6 @@ void menu() {
 	printf("3.删除学生信息.\n");
 	printf("4.修改学生信息.\n");
 	printf("5.保存学生信息.\n");
-	printf("6.按照学号排序.\n");
-	printf("7.查找学生信息.\n");
+	printf("6.查找学生信息.\n");
 	printf("0.退出系统操作.\n");
 }
